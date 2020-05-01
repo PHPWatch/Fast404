@@ -12,7 +12,7 @@ class Fast404Middleware {
 
     public function __construct(string $error_message = 'Not found', string $regex = null, ?string $exclude_regex = null) {
         $this->error_message = $error_message;
-        $this->regex = $regex ?? '/\.(?:js|css|jpg|jpeg|gif|png|ico|exe|bin|dmg)$/i';
+        $this->regex = $regex ?? '/\.(?:js|css|jpg|jpeg|gif|png|webp|ico|exe|bin|dmg)$/i';
         $this->exclude_regex = $exclude_regex;
     }
 
