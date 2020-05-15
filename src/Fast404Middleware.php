@@ -10,6 +10,8 @@ class Fast404Middleware {
     private ?string $regex;
     private ?string $exclude_regex;
 
+    private const ALLOW_MIME = 'text/html';
+
     public function __construct(string $error_message = 'Not found', string $regex = null, ?string $exclude_regex = null) {
         $this->error_message = $error_message;
         $this->regex = $regex ?? '/\.(?:js|css|jpg|jpeg|gif|png|webp|ico|exe|bin|dmg)$/i';
@@ -29,7 +31,9 @@ class Fast404Middleware {
 
     public function isFast404(ServerRequestInterface $request): bool {
         $uri = $request->getUri()->getPath();
-        return $this->regex
+        return
+            $this->regex
+            && strpos($request->getHeaderLine('accept'), static::ALLOW_MIME) === false
             && preg_match($this->regex, $uri)
             && !(isset($this->exclude_regex) && preg_match($this->exclude_regex, $uri));
     }
