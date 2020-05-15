@@ -4,6 +4,9 @@ namespace PHPWatch\Fast404;
 
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Message\ResponseInterface;
+use function http_response_code;
+use function preg_match;
+use function strpos;
 
 class Fast404Middleware {
     private string $error_message;
