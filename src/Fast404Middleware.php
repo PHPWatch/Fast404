@@ -29,6 +29,8 @@ class Fast404Middleware {
         if ($next) {
             return $next($request, $response);
         }
+
+        return $response;
     }
 
     public function isFast404(ServerRequestInterface $request): bool {
