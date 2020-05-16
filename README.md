@@ -1,6 +1,12 @@
 # Fast 404
 
-`phpwatch/fast404` is a library/middleware that you can to quickly terminate an HTTP request with a `404 Not Found` response. The use case is a framework that handles all HTTP requests via a router, and returning a quick 404 message to static resources such as `.jpg` or `.png`. This prevents the framework from initializing rendering engines, database connections, etc to serve these types of requests. 
+Quickly terminate an HTTP request with a `404 Not Found` response for static resources.
+
+[![Latest Stable Version](https://poser.pugx.org/phpwatch/fast404/v)](https://packagist.org/packages/phpwatch/fast404) ![CI](https://github.com/PHPWatch/Fast404/workflows/CI/badge.svg?branch=master) [![Total Downloads](https://poser.pugx.org/phpwatch/fast404/downloads)](https://packagist.org/packages/phpwatch/fast404) [![License](https://poser.pugx.org/phpwatch/fast404/license)](https://github/phpwatch/fast404)
+
+`phpwatch/fast404` is a library/middleware that you can to quickly terminate an HTTP request with a `404 Not Found` response. The use case is a framework that handles all HTTP requests via a router, and returning a quick 404 message to static resources such as `.jpg` or `.png`. This prevents the framework from initializing rendering engines, database connections, etc to serve these types of requests.
+
+The use case is a framework that handles all HTTP requests via a router, and returning a quick 404 message to static resources such as `.jpg` or `.png`. This prevents the framework from initializing rendering engines, database connections, etc to serve these types of requests. 
 
 It is common that PHP frameworks use a router to handle incoming HTTP requests. Web server forwards all requests to the PHP framework (often to the `index.php` file). This has the side-effect of static resources such as `.jpg` or `.png` requests being routed to the PHP framework as well. 
 
@@ -24,6 +30,7 @@ Here is an example for Slim v3:
 **1. Add `Fast404Middleware` class to the Container**
 
 ```php
+<?php
 $container[Fast404Middleware::class] = static function (Container $container) {  
   return new Fast404Middleware();  
 };
@@ -32,6 +39,7 @@ $container[Fast404Middleware::class] = static function (Container $container) {
 **2. Use the middleware in individual routes/groups, or for the whole application**
 
 ```php
+<?php
 use PHPWatch\Fast404\Fast404Middleware;
 
 $app->add(Fast404Middleware::class); // For whole app
@@ -44,7 +52,8 @@ $app->get/users/{username},...)->add(Fast404Middleware::class); // Or, for indiv
 You can declare settings when the `Fast404Middleware` is instantiated:
 
 ```php
-Fast404Middleware(string $error_message = 'Not found', string $regex = null, ?string $exclude_regex = null)
+<?php
+new Fast404Middleware(string $error_message = 'Not found', string $regex = null, ?string $exclude_regex = null)
 ```
 
  - `$error_message`: Text for the error message. You can use anything here, including HTML content. Note that this library does not set a `content-type` header.
