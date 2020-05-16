@@ -23,8 +23,7 @@ class Fast404Middleware {
 
     final public function __invoke(ServerRequestInterface $request, ResponseInterface $response, callable $next = null): ResponseInterface {
         if ($this->isFast404($request)) {
-            http_response_code(404);
-            die($this->error_message);
+            $this->terminate();
         }
 
         if ($next) {
@@ -39,5 +38,10 @@ class Fast404Middleware {
             && strpos($request->getHeaderLine('accept'), static::ALLOW_MIME) === false
             && preg_match($this->regex, $uri)
             && !(isset($this->exclude_regex) && preg_match($this->exclude_regex, $uri));
+    }
+
+    protected function terminate(): void {
+        http_response_code(404);
+        die($this->error_message);
     }
 }
