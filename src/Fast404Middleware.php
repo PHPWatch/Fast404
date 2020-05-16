@@ -15,13 +15,13 @@ class Fast404Middleware {
 
     private const ALLOW_MIME = 'text/html';
 
-    public function __construct(string $error_message = 'Not found', string $regex = null, ?string $exclude_regex = null) {
+    final public function __construct(string $error_message = 'Not found', string $regex = null, ?string $exclude_regex = null) {
         $this->error_message = $error_message;
         $this->regex = $regex ?? '/\.(?:js|css|jpg|jpeg|gif|png|webp|ico|exe|bin|dmg)$/i';
         $this->exclude_regex = $exclude_regex;
     }
 
-    public function __invoke(ServerRequestInterface $request, ResponseInterface $response, callable $next = null): ResponseInterface {
+    final public function __invoke(ServerRequestInterface $request, ResponseInterface $response, callable $next = null): ResponseInterface {
         if ($this->isFast404($request)) {
             http_response_code(404);
             die($this->error_message);
