@@ -42,6 +42,10 @@ class Fast404Middleware {
             && !(isset($this->exclude_regex) && preg_match($this->exclude_regex, $uri));
     }
 
+    /**
+     * Terminate the request with an HTTP 404 code. This method is mocked when tested.
+     * @codeCoverageIgnore
+     */
     protected function terminate(): void {
         http_response_code(404);
         die($this->error_message);
