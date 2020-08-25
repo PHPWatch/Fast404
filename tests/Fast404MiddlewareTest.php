@@ -3,7 +3,6 @@
 namespace PHPWatch\Fast404\Tests;
 
 use PHPWatch\Fast404\Fast404Middleware;
-use PHPUnit\Framework\TestCase;
 
 class Fast404MiddlewareTest extends TestCaseBase {
     public function testInstance(): void {
