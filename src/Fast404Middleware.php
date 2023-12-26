@@ -13,7 +13,7 @@ class Fast404Middleware {
     private ?string $regex;
     private ?string $exclude_regex;
 
-    private const ALLOW_MIME = 'text/html';
+    private const string ALLOW_MIME = 'text/html';
 
     final public function __construct(string $error_message = 'Not found', string $regex = null, ?string $exclude_regex = null) {
         $this->error_message = $error_message;
