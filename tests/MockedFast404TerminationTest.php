@@ -12,7 +12,7 @@ class MockedFast404TerminationTest extends TestCaseBase {
     public function testTermination(): void {
         $instance = new class extends Fast404Middleware {
             protected const ALLOW_MIME = 'text/html';
-            protected function terminate(): void {
+            protected function terminate(): never {
                 throw new \RuntimeException('Triggerred mocked method');
             }
         };
