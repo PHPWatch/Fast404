@@ -3,12 +3,12 @@
     "description": "A PSR-7 middleware to return 404 errors fast for requests that are not worth returning a fancy 404 error.",
     "type": "library",
     "require": {
-        "php": "^7.4 || ^8.0",
-        "psr/http-message": "^1.0"
+        "php": "^8.3",
+        "psr/http-message": "^1.1 || ^2.0"
     },
     "require-dev": {
-        "phpunit/phpunit": "^9.1",
-        "nyholm/psr7": "^1.2"
+        "phpunit/phpunit": "^10.5.3",
+        "nyholm/psr7": "^1.8.1"
     },
 	"autoload": {
         "psr-4": {
@@ -24,7 +24,7 @@
     "authors": [
         {
             "name": "Ayesh Karunaratne",
-            "email": "ayesh@ayesh.me"
+            "email": "ayesh@aye.sh"
         }
     ],
     "minimum-stability": "stable"
