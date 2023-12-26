@@ -6,7 +6,7 @@ use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Message\ResponseInterface;
 use function http_response_code;
 use function preg_match;
-use function strpos;
+use function str_contains;
 
 class Fast404Middleware {
     private string $error_message;
@@ -37,7 +37,7 @@ class Fast404Middleware {
         $uri = $request->getUri()->getPath();
         return
             $this->regex
-            && strpos($request->getHeaderLine('accept'), static::ALLOW_MIME) === false
+            && !str_contains($request->getHeaderLine('accept'), static::ALLOW_MIME)
             && preg_match($this->regex, $uri)
             && !(isset($this->exclude_regex) && preg_match($this->exclude_regex, $uri));
     }
@@ -46,7 +46,7 @@ class Fast404Middleware {
      * Terminate the request with an HTTP 404 code. This method is mocked when tested.
      * @codeCoverageIgnore
      */
-    protected function terminate(): void {
+    protected function terminate(): never {
         http_response_code(404);
         die($this->error_message);
     }
